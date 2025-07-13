@@ -7,19 +7,19 @@ from pydantic import BaseModel
 # broker directories
 BROKER_DIRS = {
     "data_folder_in": DATA_DIR / "in",
-    "data_folder_out": DATA_DIR / "out",
+    "data_folder_out": DATA_DIR / "in",
     "processed_folder": DATA_DIR / "processed",
 }
 for folder in BROKER_DIRS.values():
     folder.mkdir(parents=True, exist_ok=True)
-# BROKER_DIRS["store_processed"] = True
+BROKER_DIRS["store_processed"] = True
 
 # backend directory
 BACKEND_DIR = DATA_DIR / "results"
 BACKEND_DIR.mkdir(parents=True, exist_ok=True)
 
 
-class CeleryConfig(BaseModel):
+class CeleryConfig:
     """Configuration for Celery broker and results."""
 
     broker_url: str = "filesystem://localhost"

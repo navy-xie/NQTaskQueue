@@ -29,9 +29,9 @@ dev = [
 [project.scripts]
 nqtaskqueue = "nqtaskqueue.cli:main"
 
-[[tool.uv.index]]
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-default = true
+# [[tool.uv.index]]
+# url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+# default = true
 
 [tool.ruff]
 line-length = 80
@@ -44,5 +44,10 @@ lint = "ruff check ."
 format = "ruff format ."
 check = ["lint", "format"]
 
-celery = "celery -A nqtaskqueue.celery.app worker --loglevel=info"
+run-task = "nqtaskqueue run-task"
+celery = """celery -A nqtaskqueue.celery.app worker \
+        -Q nqtaskqueue \
+        --pidfile="./logs/%n%I.pid" \
+        --logfile="./logs/%n%I.log" \
+        --loglevel=DEBUG"""
 flower = "celery flower --port=5555 --broker=file://src/nqtaskqueue/data/broker/in"

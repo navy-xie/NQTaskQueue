@@ -1,5 +1,6 @@
 .vscode/
 experiments/
+control/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
