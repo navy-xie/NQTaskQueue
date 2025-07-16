@@ -8,8 +8,9 @@ app = Typer(add_completion=False, no_args_is_help=True)
 
 @app.command()
 def run_task() -> None:
-    result = tasks.run_model.delay(
-        params={"param1": "value1", "param2": "value2"}
+    result = tasks.run_model.apply_async(
+        args=[{"param1": "value1", "param2": "value2"}],
+        queue="nqtaskqueue"
     )
 
     logger.info(f"Task submitted with ID: {result.id}")

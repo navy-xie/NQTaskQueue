@@ -2,7 +2,6 @@ from pathlib import Path
 from typing import Any
 from celery import Celery
 from .config import DATA_DIR
-from pydantic import BaseModel
 
 # broker directories
 BROKER_DIRS = {

@@ -45,9 +45,9 @@ format = "ruff format ."
 check = ["lint", "format"]
 
 run-task = "nqtaskqueue run-task"
-celery = """celery -A nqtaskqueue.celery.app worker \
+celery = """celery -A nqtaskqueue.celery worker \
         -Q nqtaskqueue \
-        --pidfile="./logs/%n%I.pid" \
+        --concurrency=2 \
         --logfile="./logs/%n%I.log" \
-        --loglevel=DEBUG"""
+        --loglevel=info"""
 flower = "celery flower --port=5555 --broker=file://src/nqtaskqueue/data/broker/in"
